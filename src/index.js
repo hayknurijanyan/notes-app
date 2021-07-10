@@ -4,14 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Signin /> */}
-    {/* <Signup /> */}
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/signin" component={Signin} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/" component={App} />
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

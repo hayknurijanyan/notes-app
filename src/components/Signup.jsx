@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Radio, Col, Row, PageHeader, Space } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Header } from "antd/lib/layout/layout";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [form] = Form.useForm();
@@ -55,7 +56,7 @@ const Signup = () => {
               Sign up
             </Button>
             <Button style={{ margin: "6px 0" }} block type="default">
-              Back to Sign in
+              <Link to="/signin">Back to sign in</Link>
             </Button>
           </Row>
         </Form.Item>

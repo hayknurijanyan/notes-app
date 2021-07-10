@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Radio, Col, Row, PageHeader, Space } from "antd";
-import { InfoCircleOutlined } from "@ant-design/icons";
-import { Header } from "antd/lib/layout/layout";
+import { Link } from "react-router-dom";
+// import { InfoCircleOutlined } from "@ant-design/icons";
+// import { Header } from "antd/lib/layout/layout";
 
 const Signin = () => {
   const [form] = Form.useForm();
@@ -52,11 +53,12 @@ const Signin = () => {
         <Form.Item>
           <Row vgutter={8} justify="center">
             <Button type="link">Forgot Password?</Button>
+
             <Button style={{ margin: "6px 0" }} block type="primary">
               Login
             </Button>
             <Button style={{ margin: "6px 0" }} block type="default">
-              Create an account
+              <Link to="/signup">Create an account</Link>
             </Button>
           </Row>
         </Form.Item>
