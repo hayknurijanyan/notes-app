@@ -7,16 +7,26 @@ import "antd/dist/antd.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
+import { createStore } from "redux";
+import allReducers from "./reducers";
+import { Provider } from "react-redux";
+
+const store = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path="/signin" component={Signin} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/" component={App} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/" component={App} />
+        </Switch>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
