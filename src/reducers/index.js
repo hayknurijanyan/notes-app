@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import userReducer from "./user";
+import userReducer from "../redux/userSlice";
 import subtotalReducer from "./subtotal";
 
 const allReducers = combineReducers({

@@ -4,12 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
 import { createStore } from "redux";
-import allReducers from "./reducers";
+import userReducer from "./redux/userSlice";
 import { Provider } from "react-redux";
+import allReducers from "./reducers";
 
 const store = createStore(
   allReducers,
@@ -19,13 +17,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/" component={App} />
-        </Switch>
-      </Router>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

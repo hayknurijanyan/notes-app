@@ -1,82 +1,33 @@
 import "./App.css";
-import Notes from "./components/Notes";
-import SearchCont from "./components/SearchCont";
-import { useState } from "react";
-import { nanoid } from "nanoid";
-import Header from "./components/Header";
-import Sider from "antd/lib/layout/Sider";
-import Layout, { Content } from "antd/lib/layout/layout";
+import Dashboard from "./components/Dashboard";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+import { auth } from "./firebase";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setActiveUser,
+  setUserLogOutState,
+  selectUserEmail,
+  selectUserName,
+} from "./redux/userSlice";
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      id: nanoid(),
-      text: "Sample Text",
-      date: "03/07/2021",
-    },
-    {
-      id: nanoid(),
-      text: "Workout",
-      date: "03/07/2021",
-    },
-    {
-      id: nanoid(),
-      text: "Node JS Course",
-      date: "03/07/2021",
-    },
-  ]);
-  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
 
-  // const handleSearchClick = (text) => {
-  //   let notesClone = [...notes];
-  //   setSearchText(text);
-  //   // const searchedNote =
-  //   // notes.filter((note) => note.text.toLowerCase().includes(text));
-  //   setNotes(notes.filter((note) => note.text.toLowerCase().includes(text)));
-  //   // setNotes(notesClone);
-  // };
-
-  const addNote = (text) => {
-    let newNotes = [...notes];
-    let date = new Date();
-    newNotes.unshift({
-      id: nanoid(),
-      text,
-      date: date.toLocaleDateString(),
-    });
-    setNotes(newNotes);
-  };
-
-  const deleteNote = (id) => {
-    const newNotes = notes.filter((note) => note.id !== id);
-    setNotes(newNotes);
-  };
-
-  // const searchNote = (searchText) => {
-  //   const searchedNote = notes.filter((note) => {
-  //     note.text.toLowerCase().includes(searchText);
-  //   });
-  //   setNotes(searchedNote);
-  // };
-
-  return (
-    <Layout>
-      <Sider></Sider>
-      <Content>
-        <div className="container">
-          <Header />
-          <SearchCont onSearchClick={setSearchText} />
-          <Notes
-            // notes={notes}
-            notes={notes.filter((note) =>
-              note.text.toLowerCase().includes(searchText)
-            )}
-            handleAddNote={addNote}
-            handleDeleteNote={deleteNote}
-          />
-        </div>
-      </Content>
-    </Layout>
+  return userName ? (
+    <div>
+      <Dashboard />
+    </div>
+  ) : (
+    <Router>
+      <Switch>
+        <Route path="/signup" component={Signup} />
+        <Route path="/" component={Signin} />
+      </Switch>
+    </Router>
   );
 }
 
