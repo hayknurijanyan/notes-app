@@ -3,21 +3,13 @@ import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import { auth } from "./firebase";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setActiveUser,
-  setUserLogOutState,
-  selectUserEmail,
-  selectUserName,
-} from "./redux/userSlice";
+import { useSelector } from "react-redux";
+import { selectUserEmail } from "./redux/userSlice";
 
 function App() {
-  const dispatch = useDispatch();
-  const userName = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
 
-  return userName ? (
+  return userEmail ? (
     <div>
       <Dashboard />
     </div>
