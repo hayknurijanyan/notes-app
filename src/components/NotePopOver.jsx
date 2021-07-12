@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import { PlusSquareOutlined } from "@ant-design/icons";
+import Edit from "./Edit";
 
-const NotePopOver = ({ text, date }) => {
+const NotePopOver = ({ text, date, handleEditedText }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
+  const handleOk = (newtext) => {
     setIsModalVisible(false);
   };
 
@@ -19,9 +20,6 @@ const NotePopOver = ({ text, date }) => {
 
   return (
     <>
-      {/* <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button> */}
       <PlusSquareOutlined onClick={showModal} />
       <Modal
         title="Text Editor"
@@ -30,9 +28,9 @@ const NotePopOver = ({ text, date }) => {
         onCancel={handleCancel}
       >
         <p>{text}</p>
+        {/* <Edit text={text} handleEditedText={handleEditedText} /> */}
       </Modal>
     </>
   );
 };
-
 export default NotePopOver;
